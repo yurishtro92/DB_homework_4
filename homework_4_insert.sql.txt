@@ -1,0 +1,15 @@
+insert into albums 
+values (9, 'We are not your kind', 2019);
+insert into tracks  
+values (16, 9, 'Unsainted', 4.20);
+
+insert into albumsauthors
+values (9, 8);
+ insert into collectionstracks 
+values (7, 16);
+
+insert into genresauthors
+values (3, 1);
+
+insert into tracks  
+values (17, 1, 'Otherside', 4.15);
