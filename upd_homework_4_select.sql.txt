@@ -1,0 +1,46 @@
+select count(authors_id) from genresauthors
+group by genres_id
+order by genres_id;
+
+SELECT count (tracks.title) FROM tracks
+JOIN albums ON tracks.album_id = albums.id
+WHERE albums.YEAR BETWEEN 2019 AND 2020;
+
+select avg(duration) from tracks 
+group by album_id
+order by album_id;
+
+select authors.name from authors 
+join albumsauthors on authors.id = albumsauthors.albums_id 
+join albums on albumsauthors.albums_id = albums.id
+where albums.year != 2020;
+
+select title from collections
+where id in (select tracks_id from collectionstracks
+where tracks_id in (select id from tracks
+where id in (select id from albums  
+where id in (select authors_id from albumsauthors
+where authors_id = 1))));
+
+select title from albums
+where id in (select albums_id from albumsauthors
+where authors_id in (select id from authors
+where id in (select authors_id from genresauthors
+group by authors_id
+having count(genres_id) >= 2)));
+
+select title from tracks
+where id not in (select tracks_id from collectionstracks);
+
+select name from authors
+where id in (select authors_id from albumsauthors
+where albums_id in (select album_id from tracks
+where duration = (select min(duration) from tracks)));
+
+select title from albums
+where id in (
+select album_id from tracks 
+group by album_id 
+having count(tracks.id) = count(album_id)
+order by count(album_id)
+limit 1);
